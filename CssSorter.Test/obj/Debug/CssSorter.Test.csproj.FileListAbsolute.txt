@@ -1,7 +1,0 @@
-c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter.Test\bin\Debug\CssSorter.Test.dll
-c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter.Test\bin\Debug\CssSorter.Test.pdb
-c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter.Test\obj\Debug\CssSorter.Test.csprojResolveAssemblyReference.cache
-c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter.Test\obj\Debug\CssSorter.Test.dll
-c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter.Test\obj\Debug\CssSorter.Test.pdb
-c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter.Test\bin\Debug\CssSorter.dll
-c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter.Test\bin\Debug\CssSorter.pdb
