@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssSorter", "CssSorter\CssSorter.csproj", "{CCDFBB2E-E2A1-4770-8CB2-B7D091F40769}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssSorter.Test", "CssSorter.Test\CssSorter.Test.csproj", "{96DC6F86-D7CB-4091-A725-2780CFAB0047}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCDFBB2E-E2A1-4770-8CB2-B7D091F40769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCDFBB2E-E2A1-4770-8CB2-B7D091F40769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCDFBB2E-E2A1-4770-8CB2-B7D091F40769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCDFBB2E-E2A1-4770-8CB2-B7D091F40769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96DC6F86-D7CB-4091-A725-2780CFAB0047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96DC6F86-D7CB-4091-A725-2780CFAB0047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96DC6F86-D7CB-4091-A725-2780CFAB0047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96DC6F86-D7CB-4091-A725-2780CFAB0047}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,5 @@
+c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter\bin\Debug\CssSorter.dll
+c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter\bin\Debug\CssSorter.pdb
+c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter\obj\Debug\CssSorter.csprojResolveAssemblyReference.cache
+c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter\obj\Debug\CssSorter.dll
+c:\users\madsk\My Documents\Visual Studio 2012\Projects\CssSorter\CssSorter\obj\Debug\CssSorter.pdb
