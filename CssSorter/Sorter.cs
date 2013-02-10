@@ -121,12 +121,18 @@ namespace CssSorter
         {
             List<string> list = new List<string>();
 
+            bool isInMultiLineComment = false;
+
             foreach (string dec in declarations)
             {
-                if (!dec.EndsWith(";") && !dec.Contains("/*"))
+                bool hasCommentStart = dec.Contains("/*");
+                bool hasCommentEnd = dec.Contains("*/");
+                if (!dec.EndsWith(";") && !hasCommentStart && !hasCommentEnd && !isInMultiLineComment)
                     list.Add(dec + ";");
                 else
                     list.Add(dec);
+                if (isInMultiLineComment && hasCommentEnd) isInMultiLineComment = false;
+                if (hasCommentStart && !hasCommentEnd) isInMultiLineComment = true;
             }
 
             return list;
