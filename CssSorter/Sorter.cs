@@ -11,6 +11,22 @@ namespace CssSorter
     {
         public string[] SortDeclarations(IEnumerable<string> declarations)
         {
+            string rule = "div {" + string.Join(Environment.NewLine, declarations) + "}";
+            CssParser parser = new CssParser();
+            StyleSheet sheet = parser.Parse(rule, true);
+
+            var comments = sheet.RuleSets[0].Block.Children.Where(c => c is CComment).Select(c => c.Text);
+            var decls = sheet.RuleSets[0].Block.Declarations.Select(d => d.Text);
+            var sorted = decls.OrderBy(d => d, new DeclarationComparer());
+
+            List<string> list = new List<string>(Stringify(sorted));
+            list.AddRange(comments.OrderBy(c => c));
+
+            return list.ToArray();
+        }
+
+        private string[] SortDeclarations2(IEnumerable<string> declarations)
+        {
             var clean = from d in declarations
                         where !string.IsNullOrWhiteSpace(d)
                         select d.Trim();
@@ -81,7 +97,7 @@ namespace CssSorter
                 string[] declarations = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                 //.Where(t => !string.IsNullOrWhiteSpace(t)).ToArray();
 
-                var sorted = SortDeclarations(declarations);
+                var sorted = SortDeclarations2(declarations);
 
                 sb.Remove(start, length - 1);
                 sb.Insert(start, string.Join("", sorted));
