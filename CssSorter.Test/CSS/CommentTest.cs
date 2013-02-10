@@ -113,5 +113,60 @@ namespace CssSorter.Test
 
             Assert.AreEqual(string.Join("\n", expected), string.Join("\n", result));
         }
+
+        [TestMethod, TestCategory("Comments")]
+        public void Comment6()
+        {
+            string[] input = new[] { 
+                "/* some comment */",
+                "top: 10px;",       
+                "/* some comment2 */",
+                "position: relative;",
+                "/* some comment3", 
+                "some comment3 continued", 
+                "some comment3 continued again*/", 
+            };
+
+            string[] expected = new[]{
+                "/* some comment */",
+                "/* some comment2 */", 
+                "/* some comment3",
+                "some comment3 continued", 
+                "some comment3 continued again*/", 
+                "position: relative;",                
+                "top: 10px;",                
+            };
+
+            string[] result = _sorter.SortDeclarations(input);
+
+            Assert.AreEqual(string.Join("\n", expected), string.Join("\n", result));
+        }
+
+        [TestMethod, TestCategory("Comments")]
+        public void Comment7()
+        {
+            string[] input = new[] { 
+                "/* some comment */",
+                "top: 10px;",       
+                "/* some comment2 */",
+                "position: relative;",
+                "/* some comment3", 
+                "some comment3 continued*/", 
+            };
+
+            string[] expected = new[]{
+                "/* some comment */",
+                "/* some comment2 */", 
+                "/* some comment3",
+                "some comment3 continued*/", 
+                "position: relative;",                
+                "top: 10px;",                
+            };
+
+            string[] result = _sorter.SortDeclarations(input);
+
+            Assert.AreEqual(string.Join("\n", expected), string.Join("\n", result));
+        }
     }
 }
+
