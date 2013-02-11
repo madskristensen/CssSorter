@@ -20,7 +20,7 @@ namespace CssSorter.Test
             string[] expected = new[]{                 
                 "_position: relative;",                
                 "top: 10px;",          
-                "/* border: none; */",
+                "\r\n/* border: none; */",
             };
 
             string[] result = _sorter.SortDeclarations(input);
@@ -40,7 +40,7 @@ namespace CssSorter.Test
             string[] expected = new[]{                
                 "position: relative;",                
                 "top: 10px;",         
-                "/* some comment */", 
+                "\r\n/* some comment */", 
             };
 
             string[] result = _sorter.SortDeclarations(input);
@@ -60,7 +60,7 @@ namespace CssSorter.Test
             string[] expected = new[]{                
                 "position: relative;",                
                 "top: 10px;",         
-                "/* some comment */", 
+                "\r\n/* some comment */", 
             };
 
             string[] result = _sorter.SortDeclarations(input);
@@ -81,8 +81,8 @@ namespace CssSorter.Test
             string[] expected = new[]{                                 
                 "position: relative;",                
                 "top: 10px;",                
-                "/* some comment */",
-                "/* some comment2 */",
+                "\r\n/* some comment */",
+                "\r\n/* some comment2 */",
             };
 
             string[] result = _sorter.SortDeclarations(input);
@@ -97,16 +97,16 @@ namespace CssSorter.Test
                 "top: 10px;",       
                 "/* some comment2 */",
                 "position: relative;",
-                "/* some comment3 */", 
-                "/* some comment */",
+                "\r\n/* some comment3 */", 
+                "\r\n/* some comment */",
             };
 
             string[] expected = new[]{
                 "position: relative;",                
                 "top: 10px;",    
-                "/* some comment */",
-                "/* some comment2 */", 
-                "/* some comment3 */",                                             
+                "\r\n/* some comment */",
+                "\r\n/* some comment2 */", 
+                "\r\n/* some comment3 */",                                             
             };
 
             string[] result = _sorter.SortDeclarations(input);
@@ -130,9 +130,9 @@ namespace CssSorter.Test
             string[] expected = new[]{
                 "position: relative;",                
                 "top: 10px;",    
-                "/* some comment */",
-                "/* some comment2 */", 
-                "/* some comment3\r\n" + 
+                "\r\n/* some comment */",
+                "\r\n/* some comment2 */", 
+                "\r\n/* some comment3\r\n" + 
                 "some comment3 continued\r\n" +
                 "some comment3 continued again*/",                         
             };
@@ -157,9 +157,9 @@ namespace CssSorter.Test
             string[] expected = new[]{
                 "position: relative;",                
                 "top: 10px;",    
-                "/* some comment */",
-                "/* some comment2 */", 
-                "/* some comment3\r\n" +
+                "\r\n/* some comment */",
+                "\r\n/* some comment2 */", 
+                "\r\n/* some comment3\r\n" +
                 "some comment3 continued*/",                             
             };
 
@@ -185,7 +185,7 @@ namespace CssSorter.Test
                 "margin-top: 25px;", 
                 "margin-bottom: 10px;",
                 "margin-left: 50px;",                
-                "/*clear: both;\r\n" +
+                "\r\n/*clear: both;\r\n" +
                 "float: left;*/",                            
             };
 
