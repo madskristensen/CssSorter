@@ -15,7 +15,7 @@ namespace CssSorter
             CssParser parser = new CssParser();
             StyleSheet sheet = parser.Parse(rule, true);
 
-            var comments = sheet.RuleSets[0].Block.Children.Where(c => c is CComment).Select(c => c.Text);
+            var comments = sheet.RuleSets[0].Block.Children.Where(c => c is CComment).Select(c => Environment.NewLine + c.Text);
             var decls = sheet.RuleSets[0].Block.Declarations.Select(d => d.Text);
             var sorted = decls.OrderBy(d => d, new DeclarationComparer());
 
