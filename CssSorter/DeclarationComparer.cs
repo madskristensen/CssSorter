@@ -11,7 +11,20 @@ namespace CssSorter
             string yOrig = GetPropertyName(y);
 
             if (xOrig == yOrig)
-                return string.Compare(x, y, StringComparison.Ordinal);
+            {
+                int xPrefixIndex = ValueList.Values.FindIndex(prefix => GetPropertyValue(x).StartsWith(prefix));
+
+
+                int yPrefixIndex = ValueList.Values.FindIndex(prefix => GetPropertyValue(y).StartsWith(prefix));
+
+                if (!xPrefixIndex.Equals(yPrefixIndex))
+                {
+                    xPrefixIndex = xPrefixIndex == -1 ? ValueList.Values.Count : xPrefixIndex;
+                    yPrefixIndex = yPrefixIndex == -1 ? ValueList.Values.Count : yPrefixIndex;
+                }
+
+                return xPrefixIndex.CompareTo(yPrefixIndex);
+            }
 
             string xNorm = GetNormalizedName(x);
             string yNorm = GetNormalizedName(y);
@@ -67,6 +80,25 @@ namespace CssSorter
             int yPos = PropertyList.Properties.IndexOf(yNorm);
 
             return xPos < yPos ? -1 : 1;
+        }
+
+        private static string GetPropertyValue(string declaration)
+        {
+            // For Mixins
+            if (declaration[0] == '.')
+                return declaration;
+
+            // For commented out properties
+            int indexStart = declaration.IndexOf(':');
+            int indexEnd = declaration.IndexOf(";");
+
+            if (indexStart > -1)
+            {
+                indexStart++;
+                return declaration.Substring(indexStart, indexEnd - indexStart).Trim();
+            }
+
+            return null;
         }
 
         private static string GetPropertyName(string declaration)
