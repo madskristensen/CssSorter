@@ -7,6 +7,23 @@ namespace CssSorter.Test
     {
         private Sorter _sorter = new Sorter();
 
+          [TestMethod, TestCategory("Comments")]
+        public void SortDeclarations_InlineComment_StaysWithAttribute()
+        {
+            string[] input = new[] {
+                "clear: none;",
+                "float: none; /* inline comment 1 */"
+            };
+
+            string[] expected = new[]{                 
+                "float: none; /* inline comment 1 */",
+                "clear: none;"
+            };
+
+            string[] result = _sorter.SortDeclarations(input);
+
+            Assert.AreEqual(string.Join("", expected), string.Join("", result));
+        }
 
         [TestMethod, TestCategory("Comments")]
         public void Comment1()
