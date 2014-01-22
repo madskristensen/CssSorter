@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.CSS.Core;
 using System.Text;
 using Microsoft.Less.Core;
+using System.Text.RegularExpressions;
 
 namespace CssSorter
 {
@@ -11,7 +12,29 @@ namespace CssSorter
     {
         public string[] SortDeclarations(IEnumerable<string> declarations)
         {
-            string rule = "div {" + string.Join(Environment.NewLine, declarations) + "}";
+            Dictionary<string, string> inlineCommentStorage = new Dictionary<string, string>();
+            List<string> filteredDeclarations = new List<string>();
+
+            // How could you do this with clever linq stuff?
+            foreach (string attribute in declarations)
+            {
+                string trimmedAttribute = attribute.Trim();
+                Match inlineCommentRegexMatch = Regex.Match(trimmedAttribute, "/\\*.*\\*/");
+                if (inlineCommentRegexMatch.Success
+                    && inlineCommentRegexMatch.Index > 0)
+                { 
+                    string comment = inlineCommentRegexMatch.Value.Trim();
+                    string value = trimmedAttribute.Remove(inlineCommentRegexMatch.Index).Trim();
+                    inlineCommentStorage.Add(value, comment);
+                    filteredDeclarations.Add(value);
+                }
+                else
+                {
+                    filteredDeclarations.Add(attribute.Trim());
+                }
+            }
+
+            string rule = "div {" + string.Join(Environment.NewLine, filteredDeclarations) + "}";
             CssParser parser = new CssParser();
             StyleSheet sheet = parser.Parse(rule, true);
 
@@ -22,7 +45,12 @@ namespace CssSorter
             List<string> list = new List<string>(Stringify(sorted));
             list.AddRange(comments.OrderBy(c => c));
 
-            return list.ToArray();
+            var query = from c in list
+                        join o in inlineCommentStorage on c equals o.Key into gj
+                        from sublist in gj.DefaultIfEmpty()
+                        select  c + (sublist.Key == null ? string.Empty : ' ' + sublist.Value);
+
+            return query.ToArray();
         }
 
         private string[] SortDeclarations2(IEnumerable<string> declarations)

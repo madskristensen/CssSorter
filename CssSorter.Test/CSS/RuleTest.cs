@@ -23,7 +23,7 @@ namespace CssSorter.Test
         public void Rule2()
         {
             string input = "div.item { top: 10px; /* ostehat */ \r\n position: relative; }";
-            string expected = "div.item {position: relative;top: 10px;\r\n/* ostehat */}";
+            string expected = "div.item {position: relative;top: 10px; /* ostehat */}";
 
             string result = _sorter.SortStyleSheet(input);
 
