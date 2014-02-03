@@ -67,7 +67,7 @@ namespace CssSorter
         public string SortStyleSheet(string css)
         {
             ICssParser parser = new CssParser();
-            StyleSheet stylesheet = parser.Parse(css, true);
+            StyleSheet stylesheet = parser.Parse(css.Trim(), true);
 
             CssFormatter formatter = new CssFormatter();
             formatter.Options.RemoveLastSemicolon = false;
@@ -86,7 +86,7 @@ namespace CssSorter
                 int length = rule.Length - 2;
 
                 string text = formatter.Format(rule.Text).Trim().Trim('}', '{');
-                string[] declarations = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] declarations = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
                 var sorted = SortDeclarations(declarations);
 
@@ -100,7 +100,7 @@ namespace CssSorter
         public string SortLess(string less)
         {
             ICssParser parser = new LessParser();
-            StyleSheet stylesheet = parser.Parse(less, true);
+            StyleSheet stylesheet = parser.Parse(less.Trim(), true);
 
             StringBuilder sb = new StringBuilder(stylesheet.Text);
 

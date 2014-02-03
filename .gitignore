@@ -18,6 +18,9 @@ Content/all*.css
 # Build results
 [Dd]ebug/
 [Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
 *_i.c
 *_p.c
 *.ilk
@@ -37,6 +40,7 @@ Content/all*.css
 .builds
 *.dotCover
 *.pubxml
+# Build results
 
 ## TODO: If you have NuGet Package Restore enabled, uncomment this
 #packages/
