@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using Microsoft.CSS.Core;
+using System.Linq;
 using System.Text;
-using Microsoft.Less.Core;
 using System.Text.RegularExpressions;
+using Microsoft.CSS.Core;
+using Microsoft.Less.Core;
 
 namespace CssSorter
 {
@@ -22,7 +22,7 @@ namespace CssSorter
                 Match inlineCommentRegexMatch = Regex.Match(trimmedAttribute, "/\\*.*\\*/");
                 if (inlineCommentRegexMatch.Success
                     && inlineCommentRegexMatch.Index > 0)
-                { 
+                {
                     string comment = inlineCommentRegexMatch.Value.Trim();
                     string value = trimmedAttribute.Remove(inlineCommentRegexMatch.Index).Trim();
                     inlineCommentStorage.Add(value, comment);
@@ -48,7 +48,7 @@ namespace CssSorter
             var query = from c in list
                         join o in inlineCommentStorage on c equals o.Key into gj
                         from sublist in gj.DefaultIfEmpty()
-                        select  c + (sublist.Key == null ? string.Empty : ' ' + sublist.Value);
+                        select c + (sublist.Key == null ? string.Empty : ' ' + sublist.Value);
 
             return query.ToArray();
         }
