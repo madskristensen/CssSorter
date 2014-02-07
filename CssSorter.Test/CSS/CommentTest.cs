@@ -7,7 +7,7 @@ namespace CssSorter.Test
     {
         private Sorter _sorter = new Sorter();
 
-          [TestMethod, TestCategory("Comments")]
+        [TestMethod, TestCategory("Comments")]
         public void SortDeclarations_InlineComment_StaysWithAttribute()
         {
             string[] input = new[] {
