@@ -86,7 +86,7 @@ namespace CssSorter
                 int length = rule.Length - 2;
 
                 string text = formatter.Format(rule.Text).Trim().Trim('}', '{');
-                string[] declarations = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                string[] declarations = text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
                 var sorted = SortDeclarations(declarations);
 
@@ -122,7 +122,7 @@ namespace CssSorter
 
                 string text = GetNormalizedText(rule, start, length);
 
-                string[] declarations = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                string[] declarations = text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 //.Where(t => !string.IsNullOrWhiteSpace(t)).ToArray();
 
                 var sorted = SortDeclarations2(declarations);
