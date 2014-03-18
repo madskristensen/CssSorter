@@ -1,7 +1,7 @@
 ﻿using CssSorter.Test.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CssSorter.Test.Less
+namespace CssSorter.Test.Scss
 {
     [TestClass]
     public class MixinTest
@@ -17,7 +17,7 @@ namespace CssSorter.Test.Less
             string input = "div.item { top: 10px; position: relative; .mixin(); }";
             string expected = "div.item {position: relative;top: 10px;.mixin();}";
 
-            string result = _sorter.SortLess(input);
+            string result = _sorter.SortScss(input);
 
             Assert.AreEqual(expected, result);
         }
@@ -31,7 +31,7 @@ namespace CssSorter.Test.Less
             string input = "div.item { top: 10px; position: relative; .mixin(@red, 5px); display: block; }";
             string expected = "div.item {position: relative;top: 10px;display: block;.mixin(@red, 5px);}";
 
-            string result = _sorter.SortLess(input);
+            string result = _sorter.SortScss(input);
 
             Assert.AreEqual(expected, result);
         }
