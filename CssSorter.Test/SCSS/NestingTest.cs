@@ -1,7 +1,7 @@
 ﻿using CssSorter.Test.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CssSorter.Test.Less
+namespace CssSorter.Test.Scss
 {
     [TestClass]
     public class NestingTest
@@ -17,7 +17,7 @@ namespace CssSorter.Test.Less
             string input = "div.item { top: 10px; position: relative; div{color:red; top: 5px;}}";
             string expected = "div.item {position: relative;top: 10px; div{top: 5px;color:red;}}";
 
-            string result = _sorter.SortLess(input);
+            string result = _sorter.SortScss(input);
 
             Assert.AreEqual(expected, result);
         }

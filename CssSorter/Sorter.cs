@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.Css.Extensions;
 using Microsoft.CSS.Core;
+using Microsoft.CSS.Editor;
+using Microsoft.Html.Editor;
 using Microsoft.Less.Core;
+using Microsoft.Scss.Core;
+using Microsoft.Web.Editor;
 
 namespace CssSorter
 {
@@ -99,15 +104,28 @@ namespace CssSorter
 
         public string SortLess(string less)
         {
-            ICssParser parser = new LessParser();
+            ICssParser parser = CssParserLocator.FindComponent(ContentTypeManager.GetContentType(LessContentTypeDefinition.LessContentType)).CreateParser();
             StyleSheet stylesheet = parser.Parse(less.Trim(), true);
 
+            return PreprocessorSorting(stylesheet);
+        }
+
+        public string SortScss(string scss)
+        {
+            ICssParser parser = CssParserLocator.FindComponent(ContentTypeManager.GetContentType(ScssContentTypeDefinition.ScssContentType)).CreateParser();
+            StyleSheet stylesheet = parser.Parse(scss.Trim(), true);
+
+            return PreprocessorSorting(stylesheet);
+        }
+
+        private string PreprocessorSorting(StyleSheet stylesheet)
+        {
             StringBuilder sb = new StringBuilder(stylesheet.Text);
 
-            var visitor = new CssItemCollector<LessRuleBlock>(true);
+            var visitor = new CssItemCollector<CssRuleBlock>(true);
             stylesheet.Accept(visitor);
 
-            foreach (LessRuleBlock rule in visitor.Items.Where(r => r.IsValid).Reverse())
+            foreach (var rule in visitor.Items.Where(r => r.IsValid).Reverse())
             {
                 if (rule.Children.Count < 2)
                     continue;
@@ -134,11 +152,18 @@ namespace CssSorter
             return sb.ToString();
         }
 
-        private static string GetNormalizedText(LessRuleBlock rule, int start, int length)
+        private static string GetNormalizedText(CssRuleBlock rule, int start, int length)
         {
             StringBuilder text = new StringBuilder();
 
-            foreach (ParseItem dec in rule.Children.Where(c => c is Declaration || c is Comment || c is LessMixinReferenceList || c is LessVariableDeclaration))
+            foreach (ParseItem dec in rule.Children.Where(
+                     c =>
+                          c is Declaration ||
+                          c is Comment ||
+                          c is LessMixinReferenceList ||
+                          c is LessVariableDeclaration ||
+                          c is ScssMixinReference ||
+                          c is ScssVariableDeclaration))
             {
                 if (dec.Start > start + length)
                     break;
@@ -149,7 +174,7 @@ namespace CssSorter
             return text.ToString();
         }
 
-        private static int AdjustLength(LessRuleBlock rule, int start, int length)
+        private static int AdjustLength(RuleBlock rule, int start, int length)
         {
             var inner = new CssItemCollector<RuleSet>();
             rule.Accept(inner);
